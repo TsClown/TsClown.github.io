@@ -79,15 +79,18 @@
 
 
 
+<meta name="description" content="正常情况下经历的生命周期 onCreate onCreate表示Activity正在被创建，此方法中可以进行一些初始化的操作  onRestart 当Activity从不可见状态重新变为可见状态的时候会被调用  onStart 此时Activity已经创建完成，处于后台状态，并不可见，无法和用户进行交互  onResume Activity已经完全可见，并且出现在前台能和用户进行交互  onPau">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android-生命周期和启动模式">
 <meta property="og:url" content="http://yoursite.com/2019/04/01/Android-生命周期和启动模式/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="正常情况下经历的生命周期 onCreate onCreate表示Activity正在被创建，此方法中可以进行一些初始化的操作  onRestart 当Activity从不可见状态重新变为可见状态的时候会被调用  onStart 此时Activity已经创建完成，处于后台状态，并不可见，无法和用户进行交互  onResume Activity已经完全可见，并且出现在前台能和用户进行交互  onPau">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-01T14:01:40.433Z">
+<meta property="og:updated_time" content="2019-04-01T16:03:01.257Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android-生命周期和启动模式">
+<meta name="twitter:description" content="正常情况下经历的生命周期 onCreate onCreate表示Activity正在被创建，此方法中可以进行一些初始化的操作  onRestart 当Activity从不可见状态重新变为可见状态的时候会被调用  onStart 此时Activity已经创建完成，处于后台状态，并不可见，无法和用户进行交互  onResume Activity已经完全可见，并且出现在前台能和用户进行交互  onPau">
 
 
 
@@ -297,7 +300,40 @@
       
 
       
-        
+        <h5 id="正常情况下经历的生命周期"><a href="#正常情况下经历的生命周期" class="headerlink" title="正常情况下经历的生命周期"></a>正常情况下经历的生命周期</h5><ul>
+<li><p>onCreate</p>
+<p>onCreate表示Activity正在被创建，此方法中可以进行一些初始化的操作</p>
+</li>
+<li><p>onRestart</p>
+<p>当Activity从不可见状态重新变为可见状态的时候会被调用</p>
+</li>
+<li><p>onStart</p>
+<p>此时Activity已经创建完成，处于后台状态，并不可见，无法和用户进行交互</p>
+</li>
+<li><p>onResume</p>
+<p>Activity已经完全可见，并且出现在前台能和用户进行交互</p>
+</li>
+<li><p>onPause</p>
+<p>Activity停止，正常情况下，onStop会紧跟着调用当用户在onPause调用的时候快快速的回到当前Activity,则onResume会被调用，这属于一种极端情况，此方法中不能做耗时操作</p>
+</li>
+<li><p>onStop</p>
+<p>Activity即将停止，可以做一些回收的工作，同样不能够是耗时操作</p>
+</li>
+<li><p>onDestory</p>
+<p>Activity即将被销毁，这里可以做一些最终的回收工作和资源释放</p>
+</li>
+</ul>
+<hr>
+<h5 id="生命周期的执行"><a href="#生命周期的执行" class="headerlink" title="生命周期的执行"></a>生命周期的执行</h5><p>  (1) 针对于一个特定的Activity A，他的第一次启动，onCreate-&gt;onStart-&gt;onResume</p>
+<p>  (2) 当用户打开新的Activity B或者切换到桌面的时候，A的生命周期如:onPause-&gt;onStop，当采用了透明的主题的时候，不会调用onStop</p>
+<p>  (3) 用户回到Activity A，A的生命周期为 onRestart-&gt;onStart-&gt;onResume</p>
+<p>  (4) 按back回退时，onPause-&gt;onStop-&gt;onDestory</p>
+<p>  (5) 当Activity被系统回收之后再次打开，生命周期和(1)一样，但是过程可能会不一样</p>
+<p>  (6) onResume对应onPause，onStart对应onStop，两队之间区别在于是否处于前台，在实际使用中两队并没有什么明显区别</p>
+<h5 id="Activity生命周期分析"><a href="#Activity生命周期分析" class="headerlink" title="Activity生命周期分析"></a>Activity生命周期分析</h5><ul>
+<li>当Activity A跳转到Activity B的时候执行的生命周期为：</li>
+</ul>
+
       
     </div>
     
@@ -387,8 +423,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -439,6 +484,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#正常情况下经历的生命周期"><span class="nav-number">1.</span> <span class="nav-text">正常情况下经历的生命周期</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#生命周期的执行"><span class="nav-number">2.</span> <span class="nav-text">生命周期的执行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Activity生命周期分析"><span class="nav-number">3.</span> <span class="nav-text">Activity生命周期分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
